@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "432021705260",
+    "project_id": "sigin-c8c28",
+    "storage_bucket": "sigin-c8c28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432021705260:android:595b2b075f4ad64c4ff789",
+        "android_client_info": {
+          "package_name": "com.Signup.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt7YlhyTOEuvwPUATmXBdr9I3UtJlc--o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
