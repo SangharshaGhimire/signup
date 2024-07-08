@@ -4,4 +4,6 @@ import 'package:signup/ui/register.dart';
 
 abstract class RegisterService {
   Future<ApiResponse> setRegister(RegisterModel register);
+  Future<ApiResponse> getRegister();
+  Future<ApiResponse> deleteRegister(String id);
 }

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:signup/core/status_util.dart';
 import 'package:signup/provider/register_provider.dart';
 import 'package:signup/ui/helper.dart';
+import 'package:signup/ui/ui.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -165,7 +166,17 @@ class _RegisterState extends State<Register> {
                               }
                             }
                           },
-                          child: Text("Register team")))
+                          child: Text("Register team"))),
+                  SizedBox(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => dataUI()));
+                        },
+                        child: Text("UI")),
+                  )
                 ],
               ),
             ),

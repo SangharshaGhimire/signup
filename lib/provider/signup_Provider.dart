@@ -16,6 +16,7 @@ class SignupProvider extends ChangeNotifier {
   TextEditingController id = TextEditingController();
 
   String? errorMessage;
+  String? idd;
   List<Signup> userList = [];
   StatusUtil SignupStatus = StatusUtil.none;
   StatusUtil DeleteStatus = StatusUtil.none;
@@ -31,13 +32,17 @@ class SignupProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  setId(String? id) {
+    idd = id;
+  }
+
   setEdit(StatusUtil value) {
     EditStatus = value;
     notifyListeners();
   }
 
-  Future<void> setSignup(String uid) async {
-    if (uid == null) {
+  Future<void> setSignup() async {
+    if (idd == null) {
       if (SignupStatus != StatusUtil.loading) {
         SignupStatusUtil(StatusUtil.loading);
       }
@@ -61,7 +66,7 @@ class SignupProvider extends ChangeNotifier {
           name: name.text,
           contactNumber: contactNumber.text,
           email: email.text,
-          id: uid,
+          id: idd,
           password: password.text);
       ApiResponse response = await signupService.setSignup(signup);
       if (response.status == StatusUtil.success) {

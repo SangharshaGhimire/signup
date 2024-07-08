@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:signup/core/status_util.dart';
 import 'package:signup/provider/login_provider.dart';
 import 'package:signup/ui/Signuui.dart';
+import 'package:signup/ui/forget.dart';
 import 'package:signup/ui/helper.dart';
 import 'package:signup/ui/page.dart';
-
 
 class LoginUI extends StatefulWidget {
   const LoginUI({super.key});
@@ -163,7 +163,13 @@ class _LoginUIState extends State<LoginUI> {
                               width: 130,
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgetPassword()));
+                                },
                                 child: Text(
                                   "Forget password",
                                   style: TextStyle(
@@ -214,8 +220,8 @@ class _LoginUIState extends State<LoginUI> {
                                       }
                                     } else if (loginprovider.LoginStatus ==
                                         StatusUtil.error) {
-                                      Helper().showSnackBar(
-                                          context, "loginFailed");
+                                      Helper()
+                                          .showSnackBar(context, "loginFailed");
                                     }
                                   },
                                   child: Text(

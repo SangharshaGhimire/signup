@@ -21,6 +21,7 @@ class _SignUPUIState extends State<SignUPUI> {
   void initState() {
     var provider = Provider.of<SignupProvider>(context, listen: false);
     if (widget.signup != null) {
+      provider.setId(widget.signup!.id);
       provider.name.text = widget.signup!.name!;
       provider.password.text = widget.signup!.password!;
       provider.email.text = widget.signup!.email!;
@@ -181,8 +182,7 @@ class _SignUPUIState extends State<SignUPUI> {
                           child: ElevatedButton(
                               onPressed: () async {
                                 if (formGlobalKey.currentState!.validate()) {
-                                  await signupprovider
-                                      .setSignup(widget.signup!.id!);
+                                  await signupprovider.setSignup();
 
                                   if (signupprovider.SignupStatus ==
                                       StatusUtil.success) {
