@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signup/firebase_options.dart';
 import 'package:signup/provider/login_provider.dart';
 import 'package:signup/provider/register_provider.dart';
+import 'package:signup/provider/role_provider.dart';
 import 'package:signup/provider/signup_Provider.dart';
 
 import 'package:signup/ui/loginui.dart';
@@ -91,6 +92,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => SignupProvider()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
         ChangeNotifierProvider(create: (context) => RegisterProvider()),
+        ChangeNotifierProvider(create: (context) => RoleProvider())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

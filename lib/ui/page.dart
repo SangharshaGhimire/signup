@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:signup/ui/home.dart';
+import 'package:signup/ui/role.dart';
 import 'package:signup/ui/search.dart';
 import 'package:signup/ui/setting.dart';
 
@@ -15,9 +16,7 @@ class _MainpagesState extends State<Mainpages> {
   List<Widget> pages = [
     Home(),
     Search(),
-    Container(
-      color: Colors.blue,
-    ),
+    roleUI(),
     Container(
       color: Colors.orange,
     ),
