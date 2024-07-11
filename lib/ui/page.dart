@@ -3,6 +3,7 @@ import 'package:signup/ui/home.dart';
 import 'package:signup/ui/role.dart';
 import 'package:signup/ui/search.dart';
 import 'package:signup/ui/setting.dart';
+import 'package:signup/ui/token.dart';
 
 class Mainpages extends StatefulWidget {
   const Mainpages({super.key});
@@ -13,15 +14,7 @@ class Mainpages extends StatefulWidget {
 
 class _MainpagesState extends State<Mainpages> {
   int selectiveIndex = 0;
-  List<Widget> pages = [
-    Home(),
-    Search(),
-    roleUI(),
-    Container(
-      color: Colors.orange,
-    ),
-    Setting()
-  ];
+  List<Widget> pages = [Home(), Search(), roleUI(), TokenUI(), Setting()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
