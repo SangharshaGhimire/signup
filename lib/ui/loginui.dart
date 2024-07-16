@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:signup/core/status_util.dart';
 import 'package:signup/provider/login_provider.dart';
@@ -268,7 +270,9 @@ class _LoginUIState extends State<LoginUI> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    signInWithGoogle();
+                                  },
                                   icon: Image.asset(
                                     "assets/images/google.jpg",
                                     height: 40,
@@ -297,5 +301,52 @@ class _LoginUIState extends State<LoginUI> {
         ),
       ),
     );
+  }
+
+  signInWithGoogle() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      try {
+        final UserCredential userCredential =
+            await auth.signInWithCredential(credential);
+
+        user = userCredential.user;
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'account-exists-with-different-credential') {
+          // handle the error here
+        } else if (e.code == 'invalid-credential') {
+          // handle the error here
+        }
+      } catch (e) {
+        // handle the error here
+      }
+    }
+
+    print(user);
+
+    String? token;
+    await user?.getIdToken().then((value) {
+      token = value;
+      print(token);
+    });
+    if (token != null) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Mainpages()));
+    }
   }
 }
