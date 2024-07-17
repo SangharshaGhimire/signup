@@ -10,7 +10,6 @@ import 'package:signup/provider/register_provider.dart';
 import 'package:signup/provider/role_provider.dart';
 import 'package:signup/provider/signup_Provider.dart';
 import 'package:signup/provider/token_provider.dart';
-
 import 'package:signup/ui/loginui.dart';
 import 'package:signup/ui/page.dart';
 import 'package:signup/ui/register.dart';
