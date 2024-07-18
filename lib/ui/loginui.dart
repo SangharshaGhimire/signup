@@ -7,6 +7,7 @@ import 'package:signup/provider/login_provider.dart';
 import 'package:signup/ui/Signuui.dart';
 import 'package:signup/ui/forget.dart';
 import 'package:signup/ui/helper.dart';
+import 'package:signup/ui/mobilenumber.dart';
 import 'package:signup/ui/page.dart';
 
 class LoginUI extends StatefulWidget {
@@ -170,7 +171,7 @@ class _LoginUIState extends State<LoginUI> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ForgetPassword()));
+                                              MobileNumber()));
                                 },
                                 child: Text(
                                   "Forget password",
