@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:signup/provider/login_provider.dart';
 import 'package:signup/ui/helper.dart';
 import 'package:signup/ui/mobilenumber.dart';
+import 'package:signup/ui/newpassword.dart';
 
 class ForgetPassword extends StatefulWidget {
   ForgetPassword({super.key, this.verificationId});
@@ -84,6 +85,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   } catch (e) {
                     Helper().showSnackBar(context, "invalid code");
                   }
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewPassword()));
                 },
                 child: Text("Proceed"))
           ],

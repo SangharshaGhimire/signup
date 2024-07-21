@@ -39,7 +39,8 @@ class _MobileNumberState extends State<MobileNumber> {
           ElevatedButton(
               onPressed: () async {
                 await FirebaseAuth.instance.verifyPhoneNumber(
-                  phoneNumber: '+977$phoneNumber',
+                  phoneNumber: '+977$phoneNumber', //'+001$phoneNumber',
+
                   verificationCompleted: (PhoneAuthCredential credential) {},
                   verificationFailed: (FirebaseAuthException e) {},
                   codeSent: (String verificationId, int? resendToken) {

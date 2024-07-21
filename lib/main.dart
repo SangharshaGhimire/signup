@@ -10,6 +10,7 @@ import 'package:signup/provider/register_provider.dart';
 import 'package:signup/provider/role_provider.dart';
 import 'package:signup/provider/signup_Provider.dart';
 import 'package:signup/provider/token_provider.dart';
+import 'package:signup/ui/Signuui.dart';
 import 'package:signup/ui/loginui.dart';
 import 'package:signup/ui/mobilenumber.dart';
 import 'package:signup/ui/page.dart';
@@ -157,8 +158,8 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        // home: isUserLoggedIn ? Mainpages() : LoginUI(),
-        home: MobileNumber(),
+        home: isUserLoggedIn ? Mainpages() : SignUPUI(),
+        //home: MobileNumber(),
         debugShowCheckedModeBanner: false,
       ),
     );
