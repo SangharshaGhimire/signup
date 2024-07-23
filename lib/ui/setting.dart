@@ -5,6 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:signup/provider/login_provider.dart';
 import 'package:signup/ui/loginui.dart';
 
 class Setting extends StatefulWidget {
@@ -25,7 +28,21 @@ class _SettingState extends State<Setting> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                var remember = prefs.getBool('isRemember');
+                if (remember == true) {
+                  await prefs.remove('isLogin');
+                } else {
+                  await prefs.remove('email');
+                  await prefs.remove('password');
+                  await prefs.remove('isLogin');
+                  await prefs.remove('isRemember');
+                  context.read<LoginProvider>().clearData();
+                }
+
+                // context.read<LoginProvider>().clearData();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => LoginUI()));
               },

@@ -9,14 +9,13 @@ import 'package:signup/repo/login_service.dart';
 import 'package:signup/repo/login_service_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
-TextEditingController emailTextField=TextEditingController();
-TextEditingController passwordTextField=TextEditingController();
+  TextEditingController emailTextField = TextEditingController();
+  TextEditingController passwordTextField = TextEditingController();
 
   String? errorMessage;
   bool isUserCheckStatus = false;
   bool isChecked = false;
   LoginService loginService = LoginServiceImpl();
-
 
   StatusUtil LoginStatus = StatusUtil.none;
 
@@ -35,7 +34,8 @@ TextEditingController passwordTextField=TextEditingController();
       LogininStatusUtil(StatusUtil.loading);
     }
 
-    Signup signup = Signup(email:emailTextField.text , password: passwordTextField.text);
+    Signup signup =
+        Signup(email: emailTextField.text, password: passwordTextField.text);
     ApiResponse response = await loginService.getSignup(signup);
     if (response.status == StatusUtil.success) {
       isUserCheckStatus = response.data;
@@ -48,33 +48,32 @@ TextEditingController passwordTextField=TextEditingController();
     }
   }
 
-  saveValueToSharedPreference() async {
+  saveValueToSharedPreference({String? email}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    await prefs.setString('email', email!);
+    print(email);
     await prefs.setBool('isLogin', true);
+    notifyListeners();
   }
 
   RememberMe(bool value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (value) {
-      await prefs.setBool('isRemember', true);
+      await prefs.setBool('isRemember', value);
       await prefs.setString("email", emailTextField.text);
       await prefs.setString("password", passwordTextField.text);
     } else {
-      await prefs.remove("Remember me");
+      await prefs.remove("isRemember");
       await prefs.remove("email");
       await prefs.remove("password");
     }
   }
 
-  ReadRememberMe() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    emailTextField.text=prefs.getString('email')??"name";
-    passwordTextField.text=prefs.getString('password')??"password";
+  clearData() {
+    emailTextField.text = "";
+
+    passwordTextField.text = "";
     notifyListeners();
-
   }
- 
-
 }

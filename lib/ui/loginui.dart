@@ -24,7 +24,6 @@ class _LoginUIState extends State<LoginUI> {
   void initState() {
     Future.delayed(Duration.zero, () {
       var provider = Provider.of<LoginProvider>(context, listen: false);
-      provider.ReadRememberMe();
     });
 
     super.initState();
@@ -95,8 +94,8 @@ class _LoginUIState extends State<LoginUI> {
                               return null;
                             },
                             controller: loginprovider.emailTextField,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            // autovalidateMode:
+                            // AutovalidateMode.onUserInteraction,
                             decoration: InputDecoration(
                                 labelText: "| Email",
                                 border: OutlineInputBorder(),
@@ -125,8 +124,8 @@ class _LoginUIState extends State<LoginUI> {
                               }
                               return null;
                             },
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            // autovalidateMode:
+                            // AutovalidateMode.onUserInteraction,
                             controller: loginprovider.passwordTextField,
                             decoration: InputDecoration(
                                 labelText: "| Password",
@@ -209,13 +208,18 @@ class _LoginUIState extends State<LoginUI> {
                                         if (loginprovider.isUserCheckStatus) {
                                           Helper().showSnackBar(
                                               context, "login Successful");
+                                          // loginprovider.clearData();
                                           loginprovider
-                                              .saveValueToSharedPreference();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Mainpages()));
+                                              .saveValueToSharedPreference(
+                                                  email: loginprovider
+                                                      .emailTextField.text);
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Mainpages()),
+                                            (Route<dynamic> route) => false,
+                                          );
                                         } else {
                                           Helper().showSnackBar(
                                               context, "invalid Data");

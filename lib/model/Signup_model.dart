@@ -24,4 +24,13 @@ class Signup {
     data['id'] = this.id;
     return data;
   }
+
+  factory Signup.fromMap(Map<String, dynamic> data, String documentId) {
+    return Signup(
+        id: documentId,
+        name: data['name'] ?? '',
+        email: data['email'] ?? '',
+        contactNumber: data['contact_number'] ?? '',
+        password: data['password'] ?? '');
+  }
 }

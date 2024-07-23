@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signup/core/api_response.dart';
 import 'package:signup/core/status_util.dart';
 import 'package:signup/model/Signup_model.dart';
@@ -18,9 +19,11 @@ class SignupProvider extends ChangeNotifier {
   String? errorMessage;
   String? idd;
   List<Signup> userList = [];
+  Signup? user;
   StatusUtil SignupStatus = StatusUtil.none;
   StatusUtil DeleteStatus = StatusUtil.none;
   StatusUtil EditStatus = StatusUtil.none;
+  StatusUtil ShowUser = StatusUtil.none;
 
   SignupStatusUtil(StatusUtil value) {
     SignupStatus = value;
@@ -38,6 +41,11 @@ class SignupProvider extends ChangeNotifier {
 
   setEdit(StatusUtil value) {
     EditStatus = value;
+    notifyListeners();
+  }
+
+  setUser(StatusUtil value) {
+    ShowUser = value;
     notifyListeners();
   }
 
@@ -103,5 +111,26 @@ class SignupProvider extends ChangeNotifier {
     } else if (response.status == StatusUtil.error) {
       setDelete(StatusUtil.error);
     }
+  }
+
+  Future<void> getUser(String email) async {
+    if (ShowUser != StatusUtil.loading) {
+      setUser(StatusUtil.loading);
+    }
+    ApiResponse response = await signupService.getUser(email);
+    if (response.status == StatusUtil.success) {
+      setUser(StatusUtil.success);
+      user = response.data;
+      print(user);
+    } else if (response.status == StatusUtil.error) {
+      setUser(StatusUtil.error);
+    }
+  }
+
+  String? savedEmail;
+  getValueToSharedPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    savedEmail = prefs.getString('email');
+    notifyListeners();
   }
 }

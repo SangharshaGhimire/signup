@@ -5,4 +5,5 @@ abstract class SignupService {
   Future<ApiResponse> setSignup(Signup signup);
   Future<ApiResponse> getSignup();
   Future<ApiResponse> deleteUser(String id);
+  Future<ApiResponse> getUser(String email);
 }

@@ -57,4 +57,24 @@ class SignupServiceImpl extends SignupService {
       return ApiResponse(status: StatusUtil.error, errorMessage: e.toString());
     }
   }
+
+  Future<ApiResponse> getUser(String email) async {
+    try {
+      var response = await FirebaseFirestore.instance
+          .collection("signup")
+          .where("email", isEqualTo: email)
+          .get();
+
+      if (response.docs.isNotEmpty) {
+        final doc = response.docs.first;
+        final user = Signup.fromMap(doc.data(), doc.id);
+        return ApiResponse(status: StatusUtil.success, data: user);
+      } else {
+        return ApiResponse(
+            status: StatusUtil.error, errorMessage: "User not found");
+      }
+    } catch (e) {
+      return ApiResponse(status: StatusUtil.error, errorMessage: e.toString());
+    }
+  }
 }
